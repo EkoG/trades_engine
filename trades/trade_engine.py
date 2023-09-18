@@ -34,13 +34,14 @@ class TradeEngine:
         To Indentify any customer with more than 3 trades we count the trades of each trader then filter
         and finally display them
         """
-        # Date is hardcoded on line 13 CHECK FOR DIFFERENT DATE
+        # Date is hardcoded on line 13 CHECK FOR DIFFERENT DATE if need it
         trades = self.trades.loc[self.trades['trade_date'] == self.date]
-        # Count each of the values for the rows that gives a series not a DataFrame
+        # Count each of the values for the rows in the DataFrame (DF)
+        # Value counts method return a Series not a DF
         count_trades = trades['customer_id'].value_counts()
-        # Create a new dataFrame to check for the reset count and customer_id
+        # Create a new dataFrame using reset index and rename for the counts
         num_trades = count_trades.reset_index().rename(columns={"index": "customer_id", 0: "count"})
-        # Create the filter for the trades you want i.e.  trader with more than 3 trades will be listed
+        # Filter the number of operations (trades) you want i.e. trader with more than 3 operations will be listed
         idx = count_trades[count_trades <= trade_limit]
         # Return the list of values
         alg_traders = num_trades[~num_trades['count'].isin(idx)]
