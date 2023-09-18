@@ -17,7 +17,7 @@ class TradeEngine:
         """
         self.trades = pd.read_csv(file)
 
-    def volume(self):
+    def volume(self) -> pd.DataFrame:
         # Calculate the total buying and selling volume for each ticker
         """
         To calculate each column I grouped by ticker them sum each column and finally rename quantity to
@@ -26,7 +26,7 @@ class TradeEngine:
         volumes = self.trades.groupby("ticker").sum().rename(columns={'quantity': 'volume'})
         return volumes[['volume']]
 
-    def algo_traders(self, trade_limit: int) -> pd:
+    def algo_traders(self, trade_limit: int) -> pd.DataFrame:
         # Identify any customers that have more than 3 trades in a single day. This could indicate
         # algorithmic trading or potential discrepancies
 
@@ -46,13 +46,13 @@ class TradeEngine:
         alg_traders = num_trades[~num_trades['count'].isin(idx)]
         return alg_traders
 
-    def average_price(self):
+    def average_price(self) -> pd.DataFrame:
         # Calculate the average price for each ticker on days it was traded.
         """To calculate the average we group by ticker, and then we use mean on price column """
         avg_prices = self.trades.groupby('ticker', as_index=False)['price'].mean()
         return avg_prices
 
-    def list_trades(self, ticker, date):
+    def list_trades(self, ticker: str, date: str) -> pd.DataFrame:
         # Given a ticker and a date, return the list of trades for that ticker on the provided date.
         data = self.trades.loc[(self.trades['ticker'] == ticker) & (self.trades['trade_date'] == date)]
         return data
@@ -68,4 +68,3 @@ class TradeEngine:
     @staticmethod
     def to_dict(df: pd.DataFrame) -> object:
         return df.to_dict()
-
