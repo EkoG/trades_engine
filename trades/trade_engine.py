@@ -58,9 +58,7 @@ class TradeEngine:
         return data
 
     """
-    I added three methods to return dataFrame to csv file or to dictionary. This in order to ingest to 
-    database like MongoDb or Serialize as Json format. Also to validate date and avoid an error in the dataFrame
-    
+    I added three methods to return dataFrame to csv file or to dictionary or CSV.
     """
 
     @staticmethod
