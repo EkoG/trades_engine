@@ -58,7 +58,8 @@ class TradeEngine:
         return data
 
     """
-    I added three methods to return dataFrame to csv file or to dictionary or CSV.
+    I added two methods to return dataFrame to csv file or to dictionary. Instead of returning a DF 
+    you could return a Json (dictionary) format or CSV.
     """
 
     @staticmethod
@@ -68,3 +69,4 @@ class TradeEngine:
     @staticmethod
     def to_dict(df: pd.DataFrame) -> object:
         return df.to_dict()
+    
